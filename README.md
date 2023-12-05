@@ -1,4 +1,4 @@
-# Duck Dyn Dns NodeJs Updater
+# DuckDns (DynDNS) NodeJs Updater
 A small tool to transmit the current IP address to the DuckDNS server after a specified time frame using NodeJs. 
 
 ## Installation
