@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js"
+    "start": "node main.js",
+    "package-win-x64": "pkg --target node14-win-x64 main.js --out-dir dist"
   },
   "keywords": [],
   "author": "",
