@@ -27,33 +27,31 @@ const duckDnsToken = process.env.TOKEN;
 const updateTime = process.env.UPDATETIME * 60 * 1000;
 
 // Restlicher Code für die DynDNS-Aktualisierung
-async function updateDynDns() {
-    try {
-      const url = `https://www.duckdns.org/update?domains=${duckDnsDomain}&token=${duckDnsToken}`;
-      
-      const response = await new Promise((resolve, reject) => {
-        https.get(url, (res) => {
-          let data = '';
-          
-          res.on('data', (chunk) => {
-            data += chunk;
-          });
+function updateDynDns() {
+    const url = `https://www.duckdns.org/update?domains=${duckDnsDomain}&token=${duckDnsToken}`;
   
-          res.on('end', () => {
-            resolve({ text: () => data });
-          });
-        }).on('error', (error) => {
-          reject(error);
-        });
+    const request = https.get(url, (res) => {
+      let data = '';
+  
+      res.on('data', (chunk) => {
+        data += chunk;
       });
   
-      if (await response.text() == "OK") {
-        console.log('DynDNS update successful');
-      } else {
-        console.error('Error updating DynDNS');
-      }
-    } catch (error) {
+      res.on('end', () => {
+        handleResponse(data);
+      });
+    });
+  
+    request.on('error', (error) => {
       console.error('Error updating DynDNS:', error.message);
+    });
+  }
+  
+  function handleResponse(data) {
+    if (data == "OK") {
+      console.log('DynDNS update successful');
+    } else {
+      console.error('Error updating DynDNS');
     }
   }
 
