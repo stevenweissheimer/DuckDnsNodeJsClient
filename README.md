@@ -28,3 +28,25 @@ Für macOS x64:
 ```bash
 npm run package-macos-x64
 ```
+
+### Mit PM2 als Dienst ausführen
+
+#### 1. PM2 installieren
+
+```bash
+npm install -g pm2
+```
+
+#### 2. PM2 starten
+```bash
+npm run pm2-start
+```
+
+#### 3. PM2 Logs ansehen
+```bash
+npm run pm2-start
+```
+#### 4. PM2 Logs ansehen
+```bash
+npm run pm2-setup
+```

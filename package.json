@@ -7,7 +7,11 @@
     "start": "node main.js",
     "package-win-x64": "pkg --target node14-win-x64 main.js --out-dir dist/win-x64",
     "package-linux-x64": "pkg --target node14-linux-x64 main.js --out-dir dist/linux-x64",
-    "package-macos-x64": "pkg --target node14-macos-x64 main.js --out-dir dist/macos-x64"
+    "package-macos-x64": "pkg --target node14-macos-x64 main.js --out-dir dist/macos-x64",
+    "pm2-start": "pm2 start main.js --name DuckDNS",
+    "pm2-logs": "pm2 logs DuckDNS",
+    "pm2-setup": "pm2 startup && pm2 save",
+    "pm2": "npm run pm2-start && npm run pm2-setup"
   },  
   "keywords": [],
   "author": {
