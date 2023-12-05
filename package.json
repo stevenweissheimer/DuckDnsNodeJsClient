@@ -5,10 +5,16 @@
   "main": "main.js",
   "scripts": {
     "start": "node main.js",
-    "package-win-x64": "pkg --target node14-win-x64 main.js --out-dir dist"
-  },
+    "package-win-x64": "pkg --target node14-win-x64 main.js --out-dir dist/win-x64",
+    "package-linux-x64": "pkg --target node14-linux-x64 main.js --out-dir dist/linux-x64",
+    "package-macos-x64": "pkg --target node14-macos-x64 main.js --out-dir dist/macos-x64"
+  },  
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Steven Weißheimer",
+    "email": "coding@stevenweissheimer.com",
+    "url": "https://stevenweissheimer.com"
+  },
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.3.1",
