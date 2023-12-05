@@ -1,5 +1,5 @@
 const fs = require('fs');
-const axios = require('axios');
+const https = require('https');
 const readlineSync = require('readline-sync');
 const dotenv = require('dotenv');
 
@@ -28,13 +28,30 @@ const updateTime = process.env.UPDATETIME * 60 * 1000;
 
 // Restlicher Code für die DynDNS-Aktualisierung
 async function updateDynDns() {
-  try {
-    const response = await axios.get(`https://www.duckdns.org/update?domains=${duckDnsDomain}&token=${duckDnsToken}`);
-    console.log('DynDNS update successful:', response.data);
-  } catch (error) {
-    console.error('Error updating DynDNS:', error.message);
+    try {
+      const url = `https://www.duckdns.org/update?domains=${duckDnsDomain}&token=${duckDnsToken}`;
+      
+      const response = await new Promise((resolve, reject) => {
+        https.get(url, (res) => {
+          let data = '';
+          
+          res.on('data', (chunk) => {
+            data += chunk;
+          });
+  
+          res.on('end', () => {
+            resolve({ text: () => data });
+          });
+        }).on('error', (error) => {
+          reject(error);
+        });
+      });
+  
+      console.log('DynDNS update successful:', await response.text());
+    } catch (error) {
+      console.error('Error updating DynDNS:', error.message);
+    }
   }
-}
 
 // Aktualisiere alle 5 Minuten (300.000 Millisekunden)
 updateDynDns();
